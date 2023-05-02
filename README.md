@@ -21,4 +21,19 @@ The most important part of the task was to create a classification model that ge
 Second significant problem were extremely large class imbalance. 
 ![datasets_balance](https://user-images.githubusercontent.com/115831899/235488277-30dae94f-9d1c-4136-88b1-4bd073111466.png)
 
-To fully understand the dataset and also the problem please open _data_loading.ipynb_.   Results
+To fully understand the dataset and also the problem please open _data_loading.ipynb_.  
+
+4. Guide 
+
+In the table below lists the files and their description.
+
+| No. | File | Description | 
+| :-------: | :--------: | :-------: |
+| 1 | data_processing_0 | Basic approach, no time series(TS) transformations |
+| 2 | data_processing_1 | First approach for TS transformations | 
+| 3 | data_processing_2 | Second approach for TS transformations | 
+| 4 | data_processing_3 | Third approach for TS transformations |
+| 5 | data_processing_4 | Fourth approach for TS transformations |
+| 6 | datasets_approaches_init_evaluation | Choosing the best approach for TS transformation|
+| 7 | model_experiments | data scaling, class balancing, feature selection, dimensionality reduction, models tests, threshold balance  |
+| 8 | main_model | final pipeline, all steps together |
