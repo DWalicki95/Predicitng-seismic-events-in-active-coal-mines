@@ -40,7 +40,7 @@ In the table below lists the files and their description.
 
 The idea for solving the problem assumed to test five different approaches for time series transformation: almoast without transformation and with calculating various statistics from different time intervals. Some approaches used data from an additional dataset, others did not. 
 
-Then these 5 approaches were tested in <p>datasets_apporaches_init_evaluation.ipynb</p>.  The first turned out to be the best. 
+Then these 5 approaches were tested in <p>datasets_apporaches_init_evaluation.ipynb</p>. The first turned out to be the best.
 The first apporach to feature engineering is to:
 * kept first general columns,
 * categorical features converted to integers,
