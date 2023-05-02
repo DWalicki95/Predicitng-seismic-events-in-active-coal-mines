@@ -85,7 +85,7 @@ The first apporach to feature engineering is to:
 * AUC: 0.88
 
 | Class | Precision | Recall | F1-score |
-| :-------: | :--------: | :-------: | :-------: | :-------: |
+| :-------: | :--------: | :-------: | :-------: |
 | Normal | 1.00 | O.83| 0.91 |
 | <b>Warning</b> | 0.23 | 0.93 | 0.36 |
 
