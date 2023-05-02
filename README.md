@@ -1,6 +1,8 @@
 # Predicitng-seismic-events-in-active-coal-mines
 
-1. This project is about prediction of seismic events in active coal mine. Safety of miners is the most important       requirement for the coal mining industry. Coal mining companies are obligated by the law to introduce many safety measurements, but sometimes systems fail which have fatal consequences. The purpose of this project is to find methods for predicting periods of increased seismic activity in a miners' workplace. This was AAIA'16 Data Mining Challenge from knowledgePit - a data challange platform (https://knowledgepit.ml/aaia16-data-mining-challenge/).  
+1. Introduction
+
+This project is about prediction of seismic events in active coal mine. Safety of miners is the most important       requirement for the coal mining industry. Coal mining companies are obligated by the law to introduce many safety measurements, but sometimes systems fail which have fatal consequences. The purpose of this project is to find methods for predicting periods of increased seismic activity in a miners' workplace. This was AAIA'16 Data Mining Challenge from knowledgePit - a data challange platform (https://knowledgepit.ml/aaia16-data-mining-challenge/).  
 
 2. Requirements to run
 
@@ -92,3 +94,10 @@ The first apporach to feature engineering is to:
 ![lightGBM - confusion matrix](https://user-images.githubusercontent.com/115831899/235650354-18969f4b-6b3d-4abb-a3dd-178f80b52c08.png)
 
 
+7. Sources
+
+* Challange page: https://knowledgepit.ml/aaia16-data-mining-challenge/
+* Thanks for datasets sharing for Mr Andrzej Janusz,
+* A.Janusz, M.Grzegorzewski, M.Michalak, Ł.Wróbel, M.Sikora, D.Ślęzak, "Predicting seismic events in coal mines based on underground sensor measurements", Engineering Applications of Artificial Intelligence 64, 83-94, 2017
+* R. Bogucki, J. Lasek, J. Kanty Milczek, M. Tadeusiak, deepsense.io, "Early Warning System for Seismic Events in Coal Mines Using Machine Learning", Proceedings of Federated Conference on Computer Science and Information Systems pp.213-220, 2016
+* E.Zdravevski, P.Lameski, A.Kulakov, "Automatic Feature Engineering for Prediction of Dangerous Seismic Activities in Coal Mines, Proceedings of the Federated Conference on Computer Science and Information Systems pp. 245-248, 216.
