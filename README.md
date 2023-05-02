@@ -29,21 +29,30 @@ In the table below lists the files and their description.
 
 | No. | File | Description | 
 | :-------: | :--------: | :-------: |
-| 1 | data_processing_0 | Basic approach, no time series(TS) transformations |
-| 2 | data_processing_1 | First approach for TS transformations | 
-| 3 | data_processing_2 | Second approach for TS transformations | 
-| 4 | data_processing_3 | Third approach for TS transformations |
-| 5 | data_processing_4 | Fourth approach for TS transformations |
-| 6 | datasets_approaches_init_evaluation | Choosing the best approach for TS transformation|
-| 7 | model_experiments | data scaling, class balancing, feature selection, dimensionality reduction, models tests, threshold balance  |
-| 8 | main_model | final pipeline, all steps together |
+| 1 | ****data_loading**** | Data overview |
+| 2 | ****data_processing_0**** | Basic approach, no time series(TS) transformations |
+| 3 | ****data_processing_1**** | First approach for TS transformations | 
+| 4 | ****data_processing_2**** | Second approach for TS transformations | 
+| 5 | ****data_processing_3**** | Third approach for TS transformations |
+| 6 | ****data_processing_4**** | Fourth approach for TS transformations |
+| 7 | ****datasets_approaches_init_evaluation**** | Choosing the best approach for TS transformation|
+| 8 | ****model_experiments**** | data scaling, class balancing, feature selection, dimensionality reduction, models tests, threshold balance  |
+| 9 | ****main_model**** | final pipeline, all steps together |
 
 The idea for solving the problem assumed to test five different approaches for time series transformation: almoast without transformation and with calculating various statistics from different time intervals. Some approaches used data from an additional dataset, others did not. 
 
-Then these 5 approaches were tested in <p>datasets_apporaches_init_evaluation.ipynb</p>. The first turned out to be the best.
+Then these 5 approaches were tested in ****datasets_apporaches_init_evaluation.ipynb****. The first turned out to be the best.
 The first apporach to feature engineering is to:
 * kept first general columns,
 * categorical features converted to integers,
 * count_e*, sum_e*, number_of_rock_bursts, highest_bump_energy (respectively: number of bumps, energies of bumps) summed over each time series period - 24 hours. 
 * aggregate time series: max_gactivity, max_genergy, avg_gactivity, avg_genergy, max_difference_in_gactivity, max_difference_in_genergy, avg_difference_in_gactivity, avg_difference_in_genergy in a following way:
   * compute statistics like average and absolute values average, std, max and absolute values max, last 5 hours: average, std, slope of linear regression with respect to time.
+
+To see the way to develop the model you need to run the files in a following way:
+**data_loading** --- > **data_processing_1** -- > **model_experiments**
+
+Full model with all operations condensed in one pipeline you can find i **main_model**.
+
+To fully understand problem solving I encourage to see all the files in the order shown in the table above.
+
