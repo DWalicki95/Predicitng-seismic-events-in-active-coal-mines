@@ -29,19 +29,30 @@ In the table below lists the files and their description.
 
 | No. | File | Description | 
 | :-------: | :--------: | :-------: |
-| 1 | ****data_loading**** | Data overview |
-| 2 | ****data_processing_0**** | Basic approach, no time series(TS) transformations |
-| 3 | ****data_processing_1**** | First approach for TS transformations | 
-| 4 | ****data_processing_2**** | Second approach for TS transformations | 
-| 5 | ****data_processing_3**** | Third approach for TS transformations |
-| 6 | ****data_processing_4**** | Fourth approach for TS transformations |
-| 7 | ****datasets_approaches_init_evaluation**** | Choosing the best approach for TS transformation|
-| 8 | ****model_experiments**** | data scaling, class balancing, feature selection, dimensionality reduction, models tests, threshold balance  |
-| 9 | ****main_model**** | final pipeline, all steps together |
+| 1 | *data_loading* | Data overview |
+| 2 | *data_processing_0* | Basic approach, no time series(TS) transformations |
+| 3 | *data_processing_1* | First approach for TS transformations | 
+| 4 | *data_processing_2* | Second approach for TS transformations | 
+| 5 | *data_processing_3* | Third approach for TS transformations |
+| 6 | *data_processing_4* | Fourth approach for TS transformations |
+| 7 | *datasets_approaches_init_evaluation* | Choosing the best approach for TS transformation|
+| 8 | *model_experiments* | data scaling, class balancing, feature selection, dimensionality reduction, models tests, threshold balance  |
+| 9 | *main_model* | final pipeline, all steps together |
 
 The idea for solving the problem assumed to test five different approaches for time series transformation: almoast without transformation and with calculating various statistics from different time intervals. Some approaches used data from an additional dataset, others did not. 
 
-Then these 5 approaches were tested in ****datasets_apporaches_init_evaluation.ipynb****. The first turned out to be the best.
+Then these 5 approaches were tested in *datasets_apporaches_init_evaluation.ipynb*. The first turned out to be the best.
+
+To see the way to develop the model you need to run the files in a following way:
+
+*data_loading* --- > *data_processing_1* -- > *model_experiments*
+
+Full model with all operations condensed in one pipeline you can find i *main_model*.
+
+To fully understand problem solving I encourage to see all the files in the order shown in the table above.
+
+5. Methodology
+
 The first apporach to feature engineering is to:
 * kept first general columns,
 * categorical features converted to integers,
@@ -49,10 +60,35 @@ The first apporach to feature engineering is to:
 * aggregate time series: max_gactivity, max_genergy, avg_gactivity, avg_genergy, max_difference_in_gactivity, max_difference_in_genergy, avg_difference_in_gactivity, avg_difference_in_genergy in a following way:
   * compute statistics like average and absolute values average, std, max and absolute values max, last 5 hours: average, std, slope of linear regression with respect to time.
 
-To see the way to develop the model you need to run the files in a following way:
-**data_loading** --- > **data_processing_1** -- > **model_experiments**
+| No. | Problem | Tested methods | Best method | 
+| :-------: | :--------: | :-------: | :-------: |
+| 1 | Categorical features| One-hot encoding, Ordinal encoding | Ordinal encoding |
+| 2 | Data scaling | StandardScaler | StandardScaler |
+| 3 | Class balancing | Without resampling, SMOTE, ADASYN, SMOTE+RandomUnderSampler, SMOTETomek Links, SMOTEENN | SMOTE |
+| 4 | Feature selection | Pearson correlation+RFE+SelectFromModel | Pearson correlation+RFE+SelectFromModel |
+| 5 | Dimensionality reduction | Without, PCA | Without |
+| 6 | Model selection| Logistic Regression, Random Forest, LightBGM, Catboost, Xgboost | LightGBM |
+| 7 | Precision vs recall | Threshold adjust | Threshold reduction |
 
-Full model with all operations condensed in one pipeline you can find i **main_model**.
+6. Results
 
-To fully understand problem solving I encourage to see all the files in the order shown in the table above.
+* 5 models were used for experiments: Logistic Regression, Random Forest Classifier, LightGBM Classifier, Catboost Classifier, XGBoost Classifier.
+* 2 of these 5 Classifiers were rejected first, as they had given hopeless results (Catboost and Random Forest).
+* 3 of all exhibit good overall results. Logistic Regression showed slightly worse cross validation score results than 2 other models. However, none of the models were overfitted.
+* final choice of alghorithm depends on the business need and should be consulted with business before implementation.
+* nothwithstanding this, in my view in active coal mine safety of workers is on the first place, so a key metric are both ROC AUC and recall, much more important than precision. It results in detecting more True Positives (Warnings in this case), even if much of positives are False Positives. On the other hand, I was guided by not too low precision, as it results in stopping works in mine too often.
+* accoring to above, the best model was LightGBMClassifier. It exbibits highest roc_auc_score (~0.88), 0.93 recall of class 1 and 0.23 precision of class 1. Close there were XGBOOST with even higher recall (0.95), but lower precision (0.2) and roc_auc and a bit worse LogisticRegression. The winning alghoritm has another advantage - it learns really fast.
+
+
+<b>LightGBM</b> results:
+
+* AUC: 0.88
+
+| Class | Precision | Recall | F1-score |
+| :-------: | :--------: | :-------: | :-------: | :-------: |
+| Normal | 1.00 | O.83| 0.91 |
+| <b>Warning</b> | 0.23 | 0.93 | 0.36 |
+
+![lightGBM - confusion matrix](https://user-images.githubusercontent.com/115831899/235650354-18969f4b-6b3d-4abb-a3dd-178f80b52c08.png)
+
 
